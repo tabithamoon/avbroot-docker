@@ -1,5 +1,4 @@
 FROM docker.io/library/alpine:latest AS builder
-ARG ghtoken
 WORKDIR /build
 
 RUN apk add --update --no-cache github-cli openssh-keygen python3
@@ -7,7 +6,7 @@ RUN apk add --update --no-cache github-cli openssh-keygen python3
 COPY requirements.txt .
 RUN python -m venv /opt/venv && . /opt/venv/bin/activate && pip install --no-cache-dir -r requirements.txt
 
-RUN echo ${ghtoken} | gh auth login --with-token
+RUN cat /run/secrets/GITHUB_TOKEN | gh auth login --with-token
 RUN gh release download -R chenxiaolong/avbroot -p '*-x86_64-unknown-linux-gnu.zip*'
 RUN gh release download -R chenxiaolong/Custota -p '*-x86_64-unknown-linux-gnu.zip*'
 RUN gh release download -R topjohnwu/Magisk -p 'Magisk-*.apk'
