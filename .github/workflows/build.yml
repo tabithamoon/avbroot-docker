@@ -1,4 +1,7 @@
 name: Build and push fresh image
+permissions:
+  contents: read
+  packages: write
 on:
   workflow_dispatch:
 jobs:
