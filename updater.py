@@ -103,6 +103,13 @@ def update_lineageos(lineageos_version):
             shell=True,
             check=True
         )
+        subprocess.run(
+            f"/usr/bin/custota-tool gen-update-info --location lineage-shiba-signed.zip --file shiba.json",
+            capture_output=True,
+            cwd="/publish",
+            shell=True,
+            check=True
+        )
     except:
         raise RuntimeError("Failed to generate OTA metadata.")
 
