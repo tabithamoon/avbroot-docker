@@ -6,7 +6,7 @@ RUN apk add --update --no-cache github-cli openssh-keygen python3
 COPY requirements.txt .
 RUN python -m venv /opt/venv && . /opt/venv/bin/activate && pip install --no-cache-dir -r requirements.txt
 
-RUN cat /run/secrets/ghtoken | gh auth login --with-token
+RUN --mount=type=secret,id=ghtoken cat /run/secrets/ghtoken | gh auth login --with-token
 RUN gh release download -R chenxiaolong/avbroot -p '*-x86_64-unknown-linux-gnu.zip*'
 RUN gh release download -R chenxiaolong/Custota -p '*-x86_64-unknown-linux-gnu.zip*'
 RUN gh release download -R topjohnwu/Magisk -p 'Magisk-*.apk'
