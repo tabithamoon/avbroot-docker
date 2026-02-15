@@ -21,7 +21,7 @@ jobs:
 
     - name: 'Build and push'
       run: |
-        docker build . --secret id=GITHUB_TOKEN -t ghcr.io/tabithamoon/avbroot-docker:latest -t ghcr.io/tabithamoon/avbroot-docker:${{ steps.date.outputs.date }}
+        docker build --secret id=ghtoken,env=GITHUB_TOKEN -t ghcr.io/tabithamoon/avbroot-docker:latest -t ghcr.io/tabithamoon/avbroot-docker:${{ steps.date.outputs.date }} .
         docker push ghcr.io/tabithamoon/avbroot-docker:latest
         docker push ghcr.io/tabithamoon/avbroot-docker:${{ steps.date.outputs.date }}
       env:
