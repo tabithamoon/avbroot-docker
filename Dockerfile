@@ -23,7 +23,7 @@ FROM docker.io/library/alpine:latest
 WORKDIR /opt
 
 RUN apk add --update --no-cache python3
-COPY --from=builder /opt/venv .
+COPY --from=builder /opt/venv ./venv
 COPY updater.py updater
 COPY generate-keys.sh generate-keys
 RUN chmod +x updater generate-keys
