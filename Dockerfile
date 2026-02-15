@@ -25,8 +25,8 @@ WORKDIR /opt
 
 RUN apk add --update --no-cache python3
 COPY --from=builder /opt/venv .
-COPY updater .
-COPY generate-keys .
+COPY updater.py updater
+COPY generate-keys.sh generate-keys
 RUN chmod +x updater generate-keys
 
 WORKDIR /usr/bin
